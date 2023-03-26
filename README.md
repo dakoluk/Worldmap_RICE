@@ -1,4 +1,4 @@
-# Worldmap_RICE
+# Worldmap_RICE using geopandas library
 
 In the RICE-2010 model, the world is divided into 12 regions:
 
