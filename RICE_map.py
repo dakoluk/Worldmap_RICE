@@ -7,22 +7,31 @@ world = gpd.read_file(gpd.datasets.get_path('naturalearth_lowres'))
 
 
 RICE_regions = {
-    'USA': 'United States',
+    'USA': ['United States of America'],
     'EU': ['Austria', 'Belgium', 'Bulgaria', 'Croatia', 'Cyprus', 'Czech Republic', 'Denmark',
            'Estonia', 'Finland', 'France', 'Germany', 'Greece', 'Hungary', 'Ireland', 'Italy',
            'Latvia', 'Lithuania', 'Luxembourg', 'Malta', 'Netherlands', 'Poland', 'Portugal',
-           'Romania', 'Slovakia', 'Slovenia', 'Spain', 'Sweden'],
-    'JPN': 'Japan',
-    'RUS': 'Russia',
+           'Romania', 'Slovakia', 'Slovenia', 'Spain', 'Sweden', 'United Kingdom'],
+    'JPN': ['Japan'],
+    'RUS': ['Russia'],
     'EUR': ['Albania', 'Armenia', 'Azerbaijan', 'Belarus', 'Bosnia and Herzegovina', 'Georgia',
             'Iceland', 'Kazakhstan', 'Kosovo', 'Macedonia', 'Moldova', 'Montenegro', 'Norway',
-            'Serbia', 'Switzerland', 'Turkey', 'Ukraine'],
-    'CHN': 'China',
-    'IND': 'India',
+            'Serbia', 'Switzerland', 'Turkey', 'Ukraine', 'Czechia', 'North Macedonia'],
+    'CHN': ['China'],
+    'IND': ['India'],
     'MEA': ['Afghanistan', 'Algeria', 'Bahrain', 'Egypt', 'Iran', 'Iraq', 'Israel', 'Jordan',
             'Kuwait', 'Lebanon', 'Libya', 'Morocco', 'Oman', 'Qatar', 'Saudi Arabia', 'Syria',
             'Tunisia', 'United Arab Emirates', 'Yemen'],
-    'AFR': 'Sub-Saharan Africa',
+    'AFR': ['Sub-Saharan Africa', 'Liberia', 'Niger', 'Botswana', 'Palestine', 'Tajikistan', 'Senegal',
+            'Gabon', 'Uzbekistan', 'Chad', 'Eq. Guinea', 'Greenland', 'Somalia', "Côte d'Ivoire", 'Kenya',
+           'S. Sudan', 'Ethiopia', 'Tanzania', 'Vanuatu', 'Gambia', 'Antarctica',
+            'Kyrgyzstan', 'eSwatini', 'Djibouti', 'Burkina Faso', 'Zimbabwe', 'Malawi', 'Guinea',
+            'Cameroon', 'Fr. S. Antarctic Lands', 'Sierra Leone', 'Lesotho', 'Benin', 'Mali',
+            'Central African Rep.', 'Nigeria', 'Guinea-Bissau', 'Eritrea', 'Congo', 'Ghana',
+            'Angola', 'Dominican Rep.', 'Rwanda', 'Solomon Is.', 'Turkmenistan', 'Fiji', 'South Africa',
+            'Namibia', 'Bosnia and Herz.', 'Puerto Rico', 'Mozambique', 'Timor-Leste', 'Uganda', 'Togo',
+            'Madagascar', 'Burundi', 'Papua New Guinea', 'Mauritania', 'New Caledonia', 'Dem. Rep. Congo',
+            'Somaliland', 'Sudan', 'N. Cyprus', 'Zambia', 'Falkland Is.', 'W. Sahara'],
     'LAC': ['Antigua and Barbuda', 'Argentina', 'Bahamas', 'Barbados', 'Belize', 'Bolivia',
             'Brazil', 'Chile', 'Colombia', 'Costa Rica', 'Cuba', 'Dominica', 'Dominican Republic',
             'Ecuador', 'El Salvador', 'Grenada', 'Guatemala', 'Guyana', 'Haiti', 'Honduras',
@@ -40,6 +49,11 @@ def get_rice_region(country):
         if country in countries:
             return region
     return 'Others'
+
+#to check for all the countries in use
+print("Mismatched country names:")
+mismatched_countries = set(world['name']) - set(country for countries in RICE_regions.values() for country in countries)
+print(mismatched_countries)
 
 world['rice_region'] = world['name'].apply(get_rice_region)
 
